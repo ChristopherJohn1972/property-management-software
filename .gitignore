@@ -1,0 +1,24 @@
+﻿# Node
+node_modules/
+dist/
+
+# Environment variables
+.env
+.env.*
+
+# Firebase / secrets
+ServiceAccountKey.json
+firebase-config.json
+
+# Installers
+*.msi
+
+# Backup / temp files
+*.backup
+*.backup.*
+*temp*
+*.tmp
+
+# OS / editor
+.DS_Store
+.vscode/

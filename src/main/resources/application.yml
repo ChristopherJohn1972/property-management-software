@@ -1,0 +1,74 @@
+# src/main/resources/application.yml
+spring:
+  application:
+    name: property-management-system
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/property_management
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+  
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  backend:
+    url: https://rental-management-services-backend-1.onrender.com
+    allowed-ips: 74.220.49.0/24,74.220.57.0/24
+  
+  jwt:
+    secret: ${JWT_SECRET:mySuperSecretKeyForJWTGenerationAndValidationInPropertyManagementSystem}
+    expiration: 86400000 # 24 hours
+    refresh-expiration: 604800000 # 7 days
+  
+  payment:
+    stripe:
+      secret-key: ${STRIPE_SECRET_KEY}
+      public-key: ${STRIPE_PUBLIC_KEY}
+    paypal:
+      client-id: ${PAYPAL_CLIENT_ID}
+      secret: ${PAYPAL_SECRET}
+  
+  sync:
+    interval: 300000 # 5 minutes
+    enabled: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /property-management
+
+logging:
+  level:
+    com.propertymanagement: DEBUG
+    org.springframework.security: INFO
